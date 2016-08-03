@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
  */
 @Component({
   moduleId: module.id,
-  selector: 'sd-login',
+  selector: 'punch-login',
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.css']
 })
