@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../shared/index';
+import { ExternalLogin } from '../shared/index';
 
 /**
  * This class represents the lazy loaded LoginComponent.
@@ -9,4 +11,21 @@ import { Component } from '@angular/core';
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.css']
 })
-export class LoginComponent {}
+export class LoginComponent implements OnInit {
+  providers: ExternalLogin[];
+  errorMessage: string;
+
+  constructor(private accountService: AccountService){}
+
+  ngOnInit() {
+    this.getAuthProviders();
+  }
+
+  getAuthProviders() {
+    this.accountService.getAuthProviders()
+                        .subscribe(
+                          providers => this.providers = providers,
+                          error => this.errorMessage = <any>error
+                        );
+  }
+}
